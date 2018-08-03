@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue05_路由</title>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+</head>
+<body>
+        <div id="app">
+            <h2>这是头部菜单栏</h2>
+            <a v-link="{path:'/home'}" >HOME</a>
+            <a href="#/news">MEWS</a>
+            <!-- 单页面切换区域 -->
+            <router-view></router-view>
+        </div>
+
+
+        <!-- HOME模板 -->
+        <template id="home">
+            <div>
+            <h3>这是home页面标题{{msg}}</h3>
+            <p>这是home页面内容</p>
+            </div>
+        </template>
+        <!-- NEWS模板 -->
+        <template id="news">
+            <div>
+                <h3>这是news页面标题</h3>
+                <p>这是news页面内容</p>
+            </div>
+        </template>
+    <script>
+
+        //1.创建组件构造器
+        var Home = Vue.extend({
+            template:"#home",
+            data:function () {
+                return {msg:"hello,home"}
+            }
+        });
+        var News = Vue.extend({
+            template:"#news"
+        });
+        /*
+            创建路由对象
+         */
+        var router = new VueRouter();
+        /*
+            设置路由的映射,类似angular里的config
+         */
+        router.map({
+           "/home":{
+               component:Home
+           },
+            "/news":{
+                component:News
+            },
+        });
+        router.redirect({
+            "/":"/home"
+        })
+        /*
+            启动路由
+         */
+        var app = Vue.extend({})
+        router.start(app,"#app");
+
+
+//        new Vue({
+//            el:"#app",
+//
+//        })
+    </script>
+</body>
+</html>

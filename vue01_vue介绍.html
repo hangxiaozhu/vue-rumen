@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue01_vue介绍</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<!--
+    这是Vue里的View层
+-->
+    <div id="app">
+        <input type="text" v-model="message">
+        <p>{{message}}</p>
+    </div>
+    <script>
+        /*
+            这是VueDE Model层
+         */
+        var data = {message:"hello,world"};
+        //这是Vue的View-Model层,在vm里,负责链接v层和m层
+        new Vue({
+           el:"#app",
+           data:data
+        });
+    </script>
+</body>
+</html>

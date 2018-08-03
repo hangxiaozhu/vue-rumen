@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue03_组件</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <my_component></my_component>
+    </div>
+    <div id="app2">
+        <my_component></my_component>
+    </div>
+    <div id="app3">
+        <app3-component></app3-component>
+    </div>
+
+    <div id="app4">
+        <parent-component></parent-component>
+    </div>
+    <script>
+        /*
+            vue里,注册组件一共分三步
+            1.创建一个组件构造器
+            2.注册组件,并指定组件的标签名
+            3.使用组件
+
+            vue里, 注册的组件分为两种类型:
+            1.全部注册组件
+            2.局部注册组件
+            这里的全局和局部,表示组件可使用的范围大小.
+         */
+
+        //注册全局组件
+        //1.创建组件构造器
+        var cusComponent = Vue.extend({
+            template:"<div>This is my first component</div>"
+        });
+
+        //2.注册组件 ,组件名字不能大写
+        Vue.component("my_component",cusComponent);
+        new Vue({
+            el:"#app1"
+
+        });
+        new Vue({
+            el:"#app2"
+
+        });
+        //注册局部组件
+        var app3Component = Vue.extend({
+            template:"<div>This is app3 Component</div>"
+        });
+        //2.注册组件,组件名字不能大写
+        new Vue({
+            el:"#app3",
+            //该属性存储当前vm里的所有组件,在此注册的组件只允许在该vm对应的view区域里被使用
+            components:{
+                "app3-component":app3Component
+            }
+        });
+
+        //注册嵌套组件
+        var ChildC = Vue.extend({
+            template:"<div>This is a child component</div>"
+        });
+
+        var ParentC = Vue.extend({
+            template:"<div>This is a parent component</div><child-component></child-component>",
+            //在父组件里添加子组件
+            components:{
+                "child-component":ChildC
+            }
+        });
+
+        //全局注册parent组件
+        Vue.component("parent-component", ParentC);
+        new Vue({
+            el:"#app4"
+
+        });
+
+    </script>
+</body>
+</html>

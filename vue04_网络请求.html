@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue04_网络请求</title>
+    <script src="js/vue.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="js/vue-resource.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" @input="request">
+        <ul>
+            <li v-for=" a in dataArr" v-text="a.title"></li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                dataArr:[]
+            },
+            methods:{
+                request:function (event) {
+//                    console.log(event.target);
+                    var _this = this;
+                    //发起网络请求
+//                    $.ajax({
+//                        url:"https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+event.target.value,
+//                        dataType:"jsonp",
+//                        type:"get",
+//                        jsonp:"cb",
+//                        success:function (data) {
+//                           _this.dataArr = data.s;
+//                        }
+//                    })
+
+                    this.$http.jsonp("http://api.douban.com/v2/movie/nowplaying?%20app_name=doubanmovie&client=e:iPhone4,1%7Cy:iPhoneOS_6.1%7Cs:mobile%20%7Cf:doubanmovie_2%7Cv:3.3.1%7Cm:PP_market%20%7Cudid:aa1b815b8a4d1e961347304e74b9f9593d95e1c5&alt=json&city=%E5%8C%20%97%E4%BA%ACversion=2&start=0&apikey=0df993c66c0c636e29ecbb5344252a4a").then(function (data) {
+                        this.dataArr=data.data.entries;
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

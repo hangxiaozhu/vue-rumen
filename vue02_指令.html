@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue02_指令</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<!--
+    vue的指令,不同于angular,vue的指令是以v-开头的自定义属性
+    语法:
+    v-指令名 = "表达式判断或者vm中的数据名或者方法名"
+    -->
+    <!--
+        1.v-text
+        作用:操作元素的纯文本内容
+        快捷写法:{{}}
+    -->
+<!--<div id="app">-->
+    <!--{{message}}-->
+<!--</div>-->
+<!--<div id="app" v-text="message"></div>-->
+
+<!--<div id="app">-->
+    <!--<p v-text="person.name"></p>-->
+    <!--<p v-text="person.age"></p>-->
+    <!--<p v-text="person.sex"></p>-->
+    <!--<p>{{person.name}}</p>-->
+    <!--<p>{{person.age}}</p>-->
+    <!--<p>{{person.sex}}</p>-->
+<!--</div>-->
+<!--
+    2.v-html
+    作用:如果数据中有标签格式的内容,v-text会将其原样输出,v-html会解析成标签
+-->
+    <!--<div id="app1" v-text="message"></div>-->
+        <!--<div id="app1" v-html="message"></div>-->
+
+    <!--
+        3.v-bind
+        作用:绑定标签的属性
+        语法:
+        v-bind:属性名=属性值
+    -->
+<!--<div id="app2">-->
+    <!--<a v-bind:href="hrefV">点击跳转1</a>-->
+    <!--<a :href="hrefV">点击跳转2</a>-->
+<!--</div>-->
+
+    <!--
+        4.v-if 条件渲染指令,根据其后面的表达式的bool值决定是否要渲染该元素
+    -->
+<!--<div id="app3">-->
+    <!--<p v-if="male">这是男性</p>-->
+    <!--<p v-if="female">这是女性</p>-->
+    <!--<p v-if="name.indexOf('se')">Rose</p>-->
+    <!--<p v-if="age>21">这是年龄</p>-->
+<!--</div>-->
+
+<!--
+        5.v-show与v-if类似,两者的区别是v-if如果值是false,根本不渲染该标签,而v-show,只是修改css样式为display:none
+
+    -->
+
+<!--
+        6.v-else,需要结合v-if或者v-show使用,不然不起作用
+        如果v-if/v-show的值为true,则v-else的元素不显示,如果为false,v-else元素才显示
+    -->
+<!--<div id="app4">-->
+    <!--<h2 v-show="v==false">这是v-show要显示的内容</h2>-->
+    <!--<h2 v-else>这是v-else要显示的内容</h2>-->
+<!--</div>-->
+<!--
+    7.v-for 类似js的遍历,angular的ng-repeat
+    语法:
+    v-for="item in collection"
+    collection是数组,item是数组里的元素
+-->
+<!--<div id="app5">-->
+    <!--<ul v-for="per in people">-->
+        <!--<li v-text="per.name"></li>-->
+        <!--<li v-text="per.age"></li>-->
+        <!--<li v-text="per.sex"></li>-->
+    <!--</ul>-->
+<!--</div>-->
+
+<!--
+    8. v-model 一般给input控件赋值,主要实现表单控件与数据的双向绑定
+-->
+<!--<div id="app6">-->
+    <!--<input type="text" v-model="v">-->
+    <!--<p v-text="v"></p>-->
+<!--</div>-->
+
+    <!--
+        9.v-on
+        用于监听指定元素的DOM事件,比方说点击事件
+        语法:
+        v-on:事件名="函数名"
+        简写:
+        @:事件名="函数名"
+
+    -->
+    <div id="app7">
+        <input type="text" v-model="inputV">
+        <button v-on:click="func">点击事件1</button>
+        <button @click="func">点击事件2</button>
+    </div>
+
+
+<script>
+//    new Vue({
+//        el:"#app",
+//        data:{message:"hello,world",
+//            person:{name:"tom",age:20,sex:"男"}
+//        }
+//    })
+//        new Vue({
+//            el:"#app1",
+//            data:{message:"<a href='http://www.baidu.com'>点击跳转百度</a>"}
+//        })
+//    new Vue({
+//        el:"#app2",
+//        data:{
+//            hrefV:"http://www.cctv.com"
+//        }
+//    })
+//    new Vue({
+//        el:"#app3",
+//        data:{
+//            name:"Rose",
+//            age:20,
+//            male:false,
+//            female:true
+//        }
+//
+//    })
+//    new Vue({
+//        el:"#app4",
+//        data:{
+//            v:true
+//        }
+//    })
+//    new Vue({
+//        el:"#app5",
+//        data:{
+//            people:[
+//                {name:"bill",age:20,sex:"男"},
+//                {name:"Jack",age:22,sex:"男"},
+//                {name:"gang",age:18,sex:"男"},
+//                {name:"Rose",age:16,sex:"女"}
+//            ]
+//        }
+//    })
+//    new Vue({
+//        el:"#app6",
+//        data:{
+//            v:"hello,new,friend"
+//        }
+//    })
+    new Vue({
+        el:"#app7",
+        data:{
+            inputV:"how old are you"
+        },
+        methods:{
+           func:function () {
+               alert(this.inputV);
+
+           }
+        }
+    });
+</script>
+
+</body>
+</html>
